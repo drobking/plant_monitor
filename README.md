@@ -70,3 +70,82 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+# Database Schema
+
+## User Table
+Represents a user in the system.
+
+### Properties:
+- `id`: Unique identifier for the user (int, primary key).
+- `role`: Role of the user (string).
+- `listOfPlants`: Array of `Plant` objects associated with the user (relation).
+- `name`: First name of the user (string).
+- `surname`: Last name of the user (string).
+- `phonenumber`: Contact number of the user (string).
+- `email`: Email address of the user (string, unique).
+- `password`: Encrypted password of the user (string).
+
+## Plant Table
+Represents a plant entity in the system.
+
+### Properties:
+- `id`: Unique identifier for the plant (int, primary key).
+- `name`: Name of the plant (string).
+- `listOfData`: Array of `PData` objects for this plant (relation).
+- `notes`: Additional notes about the plant (string).
+
+## PData Table
+Stores periodic data for plants.
+
+### Properties:
+- `id`: Unique identifier for the PData record (int, primary key).
+- `plantId`: Foreign key referencing the associated `Plant` (relation).
+- `dirtH`: Dirt humidity level (float).
+- `airH`: Air humidity level (float).
+- `temp`: Temperature (float).
+
+---
+
+# Prisma Schema (Code)
+
+```prisma
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           Int      @id @default(autoincrement())
+  role         String
+  name         String
+  surname      String
+  phonenumber  String
+  email        String   @unique
+  password     String
+  listOfPlants Plant[]  @relation("UserPlants")
+}
+
+model Plant {
+  id          Int      @id @default(autoincrement())
+  name        String
+  notes       String?
+  listOfData  PData[]  @relation("PlantData")
+  userId      Int
+  user        User     @relation(fields: [userId], references: [id])
+}
+
+model PData {
+  id     Int     @id @default(autoincrement())
+  plantId Int
+  dirtH  Float
+  airH   Float
+  temp   Float
+  plant  Plant   @relation(fields: [plantId], references: [id])
+}
+
+
