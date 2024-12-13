@@ -1,3 +1,39 @@
+# Plant Monitoring React Project
+
+A **Plant Monitoring Application** built with **React**, featuring **Server-Side Rendering (SSR)**, **Prisma** as the ORM for database management, and containerized using **Docker**.
+
+---
+
+## Features
+
+- **React 18**: Modern UI with reusable components.
+- **Server-Side Rendering (SSR)**: Improved SEO and faster initial load times.
+- **Prisma**: Simplified database management with a type-safe ORM.
+- **Docker**: Easily deploy and run the application in a containerized environment.
+- **Tailwind CSS**: For responsive and modern styling.
+- **PostgreSQL**: As the database.
+
+---
+
+## Prerequisites
+
+Before you begin, make sure you have the following installed:
+
+- **Node.js**: [Download Node.js](https://nodejs.org/)
+- **Docker**: [Download Docker](https://www.docker.com/)
+- **PostgreSQL** (if not using Docker)
+
+---
+
+## Getting Started
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/your-repo/plant-monitoring.git
+cd plant-monitoring
+
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
