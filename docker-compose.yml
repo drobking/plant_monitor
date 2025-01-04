@@ -10,3 +10,17 @@ services:
       NODE_ENV: production
     ports:
       - 3000:3000
+  postgres:
+    image: postgres:13
+    restart: always
+    container_name: plantdb
+    ports:
+      - "5555:5432"
+    environment:
+      - POSTGRES_USER=egor
+      - POSTGRES_PASSWORD=Qwerty-1
+      - POSTGRES_DB=plantdb
+    volumes:
+      - plantdb:/var/lib/postgresql/data
+volumes:
+  plantdb:

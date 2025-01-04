@@ -1,6 +1,5 @@
  "use client";
 import { useEffect, useState } from 'react';
-
 export default function Home() {
   interface ApiResponse {
     message: string;
